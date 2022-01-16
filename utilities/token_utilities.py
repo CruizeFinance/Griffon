@@ -1,28 +1,21 @@
-import requests
+from apy.services import Services
 
 
 class TokenUtilities:
     def get_token_price_in_eth(token_ticker):
 
-        if token_ticker != "USDT":
-            while True:
-                r = requests.get(
-                    f"https://api.binance.com/api/v3/ticker/price?symbol={token_ticker}USDT"
-                )
-                if r.status_code == 200:
-                    break
-            data = r.json()
+        try:
+            services = Services(token=token_ticker)
+            data = services.token_price()
             token_in_usdt = float(data["price"])
-        else:
+        except Exception as e:
             token_in_usdt = 1.0
 
-        while True:
-            r = requests.get(
-                "https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT"
-            )
-            if r.status_code == 200:
-                break
-        data = r.json()
-        eth_in_usdt = float(data["price"])
+        try:
+            services = Services('ETH')
+            data = services.token_price()
+            eth_in_usdt = float(data["price"])
+        except Exception as e:
+            raise Exception(e)
 
         return token_in_usdt / eth_in_usdt

@@ -16,7 +16,6 @@ from apy.api.TokenAPYSerializer import TokenAPYSerializer
 
 
 class TokenAPYViewset(GenericViewSet):
-
     def list(self, request):
         request_body = request.query_params
         self.serializer_class = TokenAPYSerializer
@@ -91,8 +90,12 @@ class TokenAPYViewset(GenericViewSet):
         percentVariableBorrowAPY = 100.0 * variableBorrowRate / RAY
         percentStableBorrowAPY = 100.0 * variableBorrowRate / RAY
 
-        print(f"{token_ticker} deposit APY: {percentDepositAPY:.2f}%")  # Will replace with a logger once we have data visualization
-        print(f"{token_ticker} borrow APY: {percentVariableBorrowAPY:.2f}%")    # Will replace with a logger once we have data visualization
+        print(
+            f"{token_ticker} deposit APY: {percentDepositAPY:.2f}%"
+        )  # Will replace with a logger once we have data visualization
+        print(
+            f"{token_ticker} borrow APY: {percentVariableBorrowAPY:.2f}%"
+        )  # Will replace with a logger once we have data visualization
 
         percentDepositAPR = (
             100
@@ -115,8 +118,12 @@ class TokenAPYViewset(GenericViewSet):
             / (totalCurrentVariableDebt * TOKEN_PRICE_ETH * REWARD_DECIMALS)
         )
 
-        print(f"{token_ticker} WETH reward deposit APR: {percentDepositAPR:.2f}%")  # Will replace with a logger once we have data visualization
-        print(f"{token_ticker} WETH reward borrow APR: {percentBorrowAPR:.2f}%")    # Will replace with a logger once we have data visualization
+        print(
+            f"{token_ticker} WETH reward deposit APR: {percentDepositAPR:.2f}%"
+        )  # Will replace with a logger once we have data visualization
+        print(
+            f"{token_ticker} WETH reward borrow APR: {percentBorrowAPR:.2f}%"
+        )  # Will replace with a logger once we have data visualization
         response_data = {
             reward_token_ticker: {
                 "APR": f"{percentDepositAPR:.2f}%",

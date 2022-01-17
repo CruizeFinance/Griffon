@@ -12,7 +12,7 @@ class TokenUtilities:
             token_in_usdt = 1.0
 
         try:
-            services = Services('ETH')
+            services = Services("ETH")
             data = services.token_price()
             eth_in_usdt = float(data["price"])
         except Exception as e:

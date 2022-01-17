@@ -18,7 +18,7 @@ from apy.api.TokenAPYSerializer import TokenAPYSerializer
 class TokenAPYViewset(GenericViewSet):
 
     def list(self, request):
-        request_body = request.data
+        request_body = request.query_params
         self.serializer_class = TokenAPYSerializer
         serializer = self.serializer_class(data=request_body)
         serializer.is_valid(raise_exception=True)

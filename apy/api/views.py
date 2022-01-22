@@ -79,8 +79,9 @@ class TokenAPYViewset(GenericViewSet):
             if reward_token_ticker in token["symbol"]:
                 REWARD_DECIMALS = 10 ** float(token["decimals"])
 
-        REWARD_PRICE_ETH = TokenUtilities.get_token_price_in_eth(reward_token_ticker)
+        REWARD_PRICE_ETH = TokenUtilities.get_token_price_in_eth(reward_token_ticker, token_ticker)
         TOKEN_PRICE_ETH = TokenUtilities.get_token_price_in_eth(
+            token_ticker.replace("W", ""),
             token_ticker.replace("W", "")
         )
 
@@ -127,7 +128,7 @@ class TokenAPYViewset(GenericViewSet):
         response_data = {
             reward_token_ticker: {
                 "APR": f"{percentDepositAPR:.2f}%",
-                "APY": f"{percentBorrowAPR:.2f}%",
+                "APY": f"{percentDepositAPY:.2f}%",
             }
         }
         return Response(data=response_data, status=status.HTTP_200_OK)
